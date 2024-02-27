@@ -1,12 +1,9 @@
-import React from "react";
+const QuestionList = () => {
+	return (
+		<section>
+			<h1>Quiz Questions</h1>
+			<ul>{/* display QuestionItem components here after fetching */}</ul>
+		</section>
+)}
 
-function QuestionList() {
-  return (
-    <section>
-      <h1>Quiz Questions</h1>
-      <ul>{/* display QuestionItem components here after fetching */}</ul>
-    </section>
-  );
-}
-
-export default QuestionList;
+export default QuestionList
