@@ -9,8 +9,15 @@ const App = () => {
 	return (
 		<main>
 			<AdminNavBar onChangePage={setPage} />
-			{page === 'Form' ? <QuestionForm /> : <QuestionList />}
+			{page === 'Form' ? (
+			// 	<QuestionForm onAddQuestion={handleAddQuestion} />
+			// ) : (
+			// 	<QuestionList handleAddQuestio={handleAddQuestion} />
+			// )}
+			<QuestionForm />) : (<QuestionList /> 
+			)}
 		</main>
-)}
+	)
+}
 
 export default App

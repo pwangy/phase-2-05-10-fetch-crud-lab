@@ -1,24 +1,30 @@
 import { useState } from 'react'
 
 const QuestionForm = (props) => {
-	const [formData, setFormData] = useState({
-		prompt: '',
+  
+
+  const initialState = {
+    prompt: '',
 		answer1: '',
 		answer2: '',
 		answer3: '',
 		answer4: '',
 		correctIndex: 0
-	})
+  }
 
-	function handleChange(event) {
+	const [formData, setFormData] = useState(initialState)
+
+	function handleChange(e) {
 		setFormData({
 			...formData,
-			[event.target.name]: event.target.value
+			[e.target.name]: e.target.value
 		})
 	}
 
-	function handleSubmit(event) {
-		event.preventDefault()
+	function handleSubmit(e) {
+		e.preventDefault()
+
+
 		console.log(formData)
 	}
 
