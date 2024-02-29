@@ -19,8 +19,6 @@ const QuestionForm = ({ onAdd }) => {
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		console.log(formData)
-
 		fetch('http://localhost:4000/questions/', {
 			method: 'POST',
 			headers: {
@@ -46,7 +44,6 @@ const QuestionForm = ({ onAdd }) => {
 			.then(newQuestion => onAdd(newQuestion))
 			.catch(err => console.error(err.message))
 	}
-// ! update questionlist with new question
 
 	return (
 		<section>

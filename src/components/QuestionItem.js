@@ -1,6 +1,4 @@
-const QuestionItem = ({ id, prompt, answers, correctIndex }) => {
-	// const { id, prompt, answers, correctIndex } = question
-
+const QuestionItem = ({ id, prompt, answers, correctIndex, handleDelete }) => {
 	const options = answers.map((answer, index) => (
 		<option key={index} value={index}>
 			{answer}
@@ -11,11 +9,10 @@ const QuestionItem = ({ id, prompt, answers, correctIndex }) => {
 		<li>
 			<h4>Question {id}</h4>
 			<h5>Prompt: {prompt}</h5>
-			<label>
-				Correct Answer:
+			<label>Correct Answer:
 				<select defaultValue={correctIndex}>{options}</select>
 			</label>
-			<button>Delete Question</button>
+			<button onClick={() => handleDelete(id)}>Delete Question</button>
 		</li>
 )}
 

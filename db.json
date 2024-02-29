@@ -65,28 +65,6 @@
         "controlled"
       ],
       "correctIndex": 1
-    },
-    {
-      "prompt": "question?",
-      "answers": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "correctIndex": 2,
-      "id": 7
-    },
-    {
-      "prompt": "question!",
-      "answers": [
-        "blahlbha",
-        "bee",
-        "see",
-        "dee"
-      ],
-      "correctIndex": 2,
-      "id": 8
     }
   ]
 }

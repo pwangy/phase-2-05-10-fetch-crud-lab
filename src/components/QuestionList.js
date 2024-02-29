@@ -1,8 +1,8 @@
 // import { useState, useEffect } from 'react'
 import QuestionItem from './QuestionItem'
 
-const QuestionList = ({ quiz }) => {
-  const renderQuestions = quiz.map(question => (<QuestionItem key={question.id} {...question} />))
+const QuestionList = ({ quiz, handleDelete }) => {
+  const renderQuestions = quiz.map(question => (<QuestionItem key={question.id} {...question} handleDelete={handleDelete} />))
 
 	return (
 		<section>
