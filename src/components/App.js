@@ -20,32 +20,49 @@ const App = () => {
 		})()
 	  }, [])
 
-	  const handleAdd = (newQuestion) => {
-		setQuiz([...quiz, newQuestion])
-	  }
+	const handleAdd = (newQuestion) => {
+	setQuiz([...quiz, newQuestion])
+	}
 
-	  const handleDelete = id => { // DELETE a question
+	const handleDelete = id => { // DELETE a question
 		const questionToDelete = quiz.find(quiz => quiz.id === id) //find correct question
 		setQuiz(currentQuiz => currentQuiz.filter(quiz => quiz.id !== id)) //optimistically update UI
-
 		fetch(`${API}${id}`, { method: 'DELETE' }) // update server
 			.then(res => {
 				if(!res.ok) {
-					throw new Error('Something went wrong with this delete request.')
+					throw new Error('Could not delete question')
 				}
 			})
 			.catch(err => {
-				console.error(err)
+				console.error(err.message)
 				setQuiz(currentQuiz => [...currentQuiz, questionToDelete])
 			})
-	  }
+	}
+
+	const onNewAnswer = (id, newAnswer) => {
+		fetch(`${API}${id}`, {
+			method: 'PATCH',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ 
+				correctIndex: `${newAnswer}`
+			})
+		})
+	  		.then(res => {
+				if(!res.ok) {
+					throw new Error(`Could not update answer to index ${newAnswer}`)
+				}
+				return res.json()
+			})
+			.then(updateAnswer => onNewAnswer(updateAnswer))
+			.catch(err => console.error(err.message))
+	}
 
 	return (
 		<main>
 			<AdminNavBar onChangePage={setPage} />
 			{page === 'Form' 
 				? (<QuestionForm onAdd={handleAdd} />) 
-				: (<QuestionList quiz={quiz} handleDelete={handleDelete} setQuiz={setQuiz} />)
+				: (<QuestionList quiz={quiz} handleDelete={handleDelete} setQuiz={setQuiz} onNewAnswer={onNewAnswer} />)
 			}
 		</main>
 )}

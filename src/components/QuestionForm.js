@@ -1,14 +1,16 @@
 import { useState } from 'react'
 
+const initialState = {
+	prompt: '',
+	answer1: '',
+	answer2: '',
+	answer3: '',
+	answer4: '',
+	correctIndex: 0,
+}
+
 const QuestionForm = ({ onAdd }) => {  
-	const [formData, setFormData] = useState({
-		prompt: '',
-		answer1: '',
-		answer2: '',
-		answer3: '',
-		answer4: '',
-		correctIndex: 0
-	})
+	const [formData, setFormData] = useState(initialState)
 
 	const handleChange = e => {
 		setFormData({
@@ -35,16 +37,14 @@ const QuestionForm = ({ onAdd }) => {
 				correctIndex: parseInt(formData.correctIndex)
 			})
 		})
-			.then(res => {
-				if (!res.ok) {
-					throw new Error('Server is not running')
-				}
-				return res.json()
+			.then(res => res.json())
+			.then(newQuestion => {
+				onAdd(newQuestion)
 			})
-			.then(newQuestion => onAdd(newQuestion))
 			.catch(err => console.error(err.message))
+			setFormData(initialState)
 	}
-
+	
 	return (
 		<section>
 			<h1>New Question</h1>
